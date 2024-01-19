@@ -1,16 +1,3 @@
-<script>
-export default{
-    name:'InputComponent',
-    props:{
-        todoItem:{
-            type:Array,
-            default:[]
-        }
-        
-    }
-}
-
-</script>
 
 <template>
   <div class="inputContainer">
@@ -18,6 +5,15 @@ export default{
         <button><i class="ri-add-circle-fill"></i></button>
     </div>
 </template>
+
+
+<script>
+export default{
+   
+}
+
+</script>
+
 
 <style scoped>
  .inputContainer{

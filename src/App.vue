@@ -1,40 +1,42 @@
+<template>
+  <div id="app">
+    <div class="container">
+      <h1>TODO List</h1>
+      <InputComponent ></InputComponent>
+      <TaskListComponent :todoItems="tasks"></TaskListComponent>
+    </div>
+  </div>
+</template>
+
 <script>
 import InputComponent from './components/InputComponent.vue';
-import TaskComponent from './components/TaskComponent.vue';
+import TaskListComponent from './components/TaskListComponent.vue';
 export default{
   name:'App',
   components:{
     InputComponent,
-    TaskComponent
+    TaskListComponent
   },
   data(){
     return{
-      tasks:[
-      {
-        id:1,
-        todo:"Gym",
-        isComplete:false
-      },
-      {
-        id:2,
-        todo:"Study",
-        isComplete:true
-      }
-    ]
+        tasks:[
+          {
+            id:1,
+            todo:"Gym",
+            isComplete:false
+          },
+          {
+            id:2,
+            todo:"Study",
+            isComplete:true
+          }
+      ]
     }
   }
 }
 </script>
 
-<template>
-  <div id="app">
-    <div class="container">
-      <h1>TODO List</h1>
-      <InputComponent :todo-item="tasks"></InputComponent>
-      <TaskComponent></TaskComponent>
-    </div>
-  </div>
-</template>
+
 
 <style scoped>
 #app{

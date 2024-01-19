@@ -1,11 +1,14 @@
 <template>
-    <div class="taskContainer">
-        <ul class="todoTasks">
-            <li class="todoTask">
-                <h3>Task1</h3>
-                <button class="status is-complete">Completed</button>
+    <ul class="todoTasks">
+        <div v-for="(element, index) in todoTasks" :key="index">
+        <li class="todoTask" >
+                <h3>{{ element.todo }}</h3>
+                <button class="status is-complete">{{ element.isComplete }}</button>
                 <i class="ri-close-circle-fill"></i>
             </li>
+        </div>
+    </ul>
+            
             <!-- <li class="todoTask">
                 <h3>Task1</h3>
                 <button class="status is-complete">Completed</button>
@@ -17,12 +20,20 @@
                 <i class="ri-close-circle-fill"></i>
             </li> -->
             
-        </ul>
-    </div>
+       
 </template>
 
 <script>
-
+export default{
+    name:'TaskComponent',
+    props:{
+        todoTasks:{
+            id:Number,
+            todo:String,
+            isComplete:Boolean
+        }
+    }
+}
 </script>
 
 <style scoped>
