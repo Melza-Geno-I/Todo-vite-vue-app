@@ -2,7 +2,7 @@
   <div id="app">
     <div class="container">
       <h1>TODO List</h1>
-      <InputComponent ></InputComponent>
+      <InputComponent :tasks="tasks" @addtask="addTask"></InputComponent>
       <TaskListComponent :todoItems="tasks"></TaskListComponent>
     </div>
   </div>
@@ -22,15 +22,25 @@ export default{
         tasks:[
           {
             id:1,
-            todo:"Gym",
-            isComplete:false
+            task:"task 1",
+            status:'Pending'
           },
           {
             id:2,
-            todo:"Study",
-            isComplete:true
-          }
+            task:"task 2",
+            status:'Completed'
+          },
       ]
+    }
+  },
+  methods:{
+    addTask(task){
+      this.tasks.push(task);
+      console.log(this.tasks);
+      this.display();
+    },
+    display(){
+
     }
   }
 }

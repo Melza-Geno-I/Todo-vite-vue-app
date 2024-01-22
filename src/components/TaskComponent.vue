@@ -1,36 +1,25 @@
 <template>
     <ul class="todoTasks">
-        <div v-for="(element, index) in todoTasks" :key="index">
+        <div v-for="element in todoTasks" >
         <li class="todoTask" >
-                <h3>{{ element.todo }}</h3>
-                <button class="status is-complete">{{ element.isComplete }}</button>
+                <h3>{{ element.task}}</h3>
+                <button @click="toggleStatus" :class="{is:true, completed: element.status==='Pending'}">{{ element.status }}</button>
                 <i class="ri-close-circle-fill"></i>
             </li>
         </div>
     </ul>
-            
-            <!-- <li class="todoTask">
-                <h3>Task1</h3>
-                <button class="status is-complete">Completed</button>
-                <i class="ri-close-circle-fill"></i>
-            </li>
-            <li class="todoTask">
-                <h3>Task1</h3>
-                <button class="status is-complete">Completed</button>
-                <i class="ri-close-circle-fill"></i>
-            </li> -->
-            
+         
        
 </template>
 
 <script>
 export default{
     name:'TaskComponent',
-    props:{
-        todoTasks:{
-            id:Number,
-            todo:String,
-            isComplete:Boolean
+    props:['todoTasks'],
+    methods:{
+        toggleStatus(){
+           console.log('toggle clicked')
+
         }
     }
 }
@@ -38,11 +27,9 @@ export default{
 
 <style scoped>
     .todoTasks{
-                /* border: 1px solid blue; */
         color: black;
-        margin: none;
         display: flex;
-        align-items: center;
+        align-items: right;
         flex-direction: column;
     }
     .todoTask{
@@ -58,11 +45,11 @@ export default{
                 /* border: 1px solid red; */
                 text-align: left;
     }
-    .todoTask .is-complete{
+    .todoTask .is{
         width: 120px;
         height: 35px;
         border-radius: 20px;
-        background-color:#42b883;
+        background-color: #42b883;
         color: white;
         border: none;
         cursor: pointer;
@@ -72,5 +59,8 @@ export default{
         color:  #5c5470; 
         cursor: pointer;
 
+    }
+    .todoTask .is.completed{
+        background-color:#E32636;
     }
 </style>

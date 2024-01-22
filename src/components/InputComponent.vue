@@ -1,14 +1,30 @@
 
 <template>
   <div class="inputContainer">
-        <input class="inputBox"  type="text" placeholder="What do you want to do?">
-        <button><i class="ri-add-circle-fill"></i></button>
+        <input class="inputBox" v-model="inputText" type="text" placeholder="What do you want to do?">
+        <button @click="addTasks"><i class="ri-add-circle-fill"></i></button>
     </div>
 </template>
 
 
 <script>
 export default{
+    props:['tasks'],
+    data(){
+        return{
+            inputText:''
+        }
+    },
+    methods:{
+        addTasks(){
+            let task = {
+                id: new Date(),
+                task: this.inputText,
+                status:'Pending'
+            }
+           this.$emit('addtask',task);
+    }
+}
    
 }
 
@@ -46,5 +62,8 @@ export default{
         font-size: 40px;
         cursor: pointer;
         color: #352f44; 
+    }
+    .inputContainer button:active{
+        transform: scale(0.9);
     }
 </style>

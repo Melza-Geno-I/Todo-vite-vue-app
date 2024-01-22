@@ -24,5 +24,10 @@ export default{
 </script>
 
 <style scoped>
-
+.taskContainer{
+    /* border: 1px solid red; */
+    width: 500px;
+    height: 600px;
+    overflow-y: auto;
+}
 </style>
