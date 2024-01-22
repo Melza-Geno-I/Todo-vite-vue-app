@@ -1,49 +1,79 @@
-<script setup>
-import HelloWorld from './components/HelloWorld.vue'
-import TheWelcome from './components/TheWelcome.vue'
-</script>
-
 <template>
   <div id="app">
-    <header>
-      <img alt="Vue logo" class="logo" src="./assets/logo.svg" width="125" height="125" />
-
-      <div class="wrapper">
-        <HelloWorld msg="You did it!" />
-      </div>
-    </header>
-
-    <main>
-      <TheWelcome />
-    </main>
+    <div class="container">
+      <h1>TODO List</h1>
+      <InputComponent :tasks="tasks" @addtask="addTask"></InputComponent>
+      <TaskListComponent :todoItems="tasks" @status="toggleStatusValue"></TaskListComponent>
+    </div>
   </div>
 </template>
 
+<script>
+import InputComponent from './components/InputComponent.vue';
+import TaskListComponent from './components/TaskListComponent.vue';
+export default{
+  name:'App',
+  components:{
+    InputComponent,
+    TaskListComponent
+  },
+  data(){
+    return{
+        tasks:[
+          {
+            id:1,
+            task:"task 1",
+            status:'Pending'
+          },
+          {
+            id:2,
+            task:"task 2",
+            status:'Completed'
+          },
+      ]
+    }
+  },
+  methods:{
+    addTask(task){
+      this.tasks.push(task);
+      console.log(this.tasks);
+      this.display();
+    },
+    display(){
+
+    },
+    toggleStatusValue(status,index){
+      console.log(index)
+      this.tasks[index].status=status;
+    }
+  }
+}
+</script>
+
+
+
 <style scoped>
-header {
-  line-height: 1.5;
+#app{
+  display: flex;
+  align-items: center;
 }
-
-.logo {
-  display: block;
-  margin: 0 auto 2rem;
+.container{
+ 
+  margin:  5%;
+  text-align: center;
+  width:600px;
+  height: 800px;
+  border-radius: 75px;
+  background-color:white;
+  .innerContainer{
+      height: 150px;
+      border-radius: 75px 75px 0 0;
+  }
 }
-
-@media (min-width: 1024px) {
-  header {
-    display: flex;
-    place-items: center;
-    padding-right: calc(var(--section-gap) / 2);
-  }
-
-  .logo {
-    margin: 0 2rem 0 0;
-  }
-
-  header .wrapper {
-    display: flex;
-    place-items: flex-start;
-    flex-wrap: wrap;
-  }
+.container h1{
+  margin: 20px  ;
+  color: black;
+  font-size: xx-large;
+  font-weight: bolder;
 }
 </style>
