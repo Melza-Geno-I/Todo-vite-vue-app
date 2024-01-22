@@ -18,7 +18,7 @@ export default{
     methods:{
         addTasks(){
             let task = {
-                id: new Date(),
+                id: new Date().getTime(),
                 task: this.inputText,
                 status:'Pending'
             }

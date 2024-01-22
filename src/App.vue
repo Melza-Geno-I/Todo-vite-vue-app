@@ -3,7 +3,7 @@
     <div class="container">
       <h1>TODO List</h1>
       <InputComponent :tasks="tasks" @addtask="addTask"></InputComponent>
-      <TaskListComponent :todoItems="tasks"></TaskListComponent>
+      <TaskListComponent :todoItems="tasks" @status="toggleStatusValue"></TaskListComponent>
     </div>
   </div>
 </template>
@@ -41,6 +41,10 @@ export default{
     },
     display(){
 
+    },
+    toggleStatusValue(status,index){
+      console.log(index)
+      this.tasks[index].status=status;
     }
   }
 }

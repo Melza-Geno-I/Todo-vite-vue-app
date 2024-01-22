@@ -1,9 +1,9 @@
 <template>
     <ul class="todoTasks">
-        <div v-for="element in todoTasks" >
+        <div v-for="(element,index) in todoTasks" :key="index">
         <li class="todoTask" >
                 <h3>{{ element.task}}</h3>
-                <button @click="toggleStatus" :class="{is:true, completed: element.status==='Pending'}">{{ element.status }}</button>
+                <button @click="toggleStatus( element.status, index)" :class="{is:true, completed: element.status==='Completed'}">{{ element.status }}</button>
                 <i class="ri-close-circle-fill"></i>
             </li>
         </div>
@@ -17,9 +17,10 @@ export default{
     name:'TaskComponent',
     props:['todoTasks'],
     methods:{
-        toggleStatus(){
+        toggleStatus(status,id){
            console.log('toggle clicked')
-
+            status = status==="Pending"? "Completed" : "Pending"
+            this.$emit("updateStatus",status,id);
         }
     }
 }
@@ -49,7 +50,7 @@ export default{
         width: 120px;
         height: 35px;
         border-radius: 20px;
-        background-color: #42b883;
+        background-color:#E32636;
         color: white;
         border: none;
         cursor: pointer;
@@ -61,6 +62,6 @@ export default{
 
     }
     .todoTask .is.completed{
-        background-color:#E32636;
+        background-color: #42b883;
     }
 </style>
