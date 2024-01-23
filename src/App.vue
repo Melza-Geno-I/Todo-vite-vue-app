@@ -3,7 +3,7 @@
     <div class="container">
       <h1>TODO List</h1>
       <InputComponent :tasks="tasks" @addtask="addTask"></InputComponent>
-      <TaskListComponent :todoItems="tasks" @status="toggleStatusValue"></TaskListComponent>
+      <TaskListComponent :todoItems="tasks" @status="toggleStatusValue" @deleteTask="deleteitem"></TaskListComponent>
     </div>
   </div>
 </template>
@@ -23,12 +23,12 @@ export default{
           {
             id:1,
             task:"task 1",
-            status:'Pending'
+            status:'Completed'
           },
           {
             id:2,
             task:"task 2",
-            status:'Completed'
+            status:'Pending'
           },
       ]
     }
@@ -37,14 +37,25 @@ export default{
     addTask(task){
       this.tasks.push(task);
       console.log(this.tasks);
-      this.display();
     },
-    display(){
-
+    deleteitem(id){
+      let index = this.tasks.findIndex( task => task.id === id)
+        if(index!=-1 && confirm('Do you want to remove this task?')){
+          this.tasks.splice(index,1);
+        }
     },
     toggleStatusValue(status,index){
       console.log(index)
       this.tasks[index].status=status;
+    },
+    sortTasks(){
+      let sortTasks=[]
+        let PendingTask=this.Tasks.status==="Pending";
+        let CompletedTask=this.Task.status==="Completed";
+
+        sortTasks+=PendingTask;
+        sortTasks+=CompletedTask;
+        tasks=sortTasks;
     }
   }
 }

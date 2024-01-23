@@ -4,7 +4,7 @@
         <li class="todoTask" >
                 <h3>{{ element.task}}</h3>
                 <button @click="toggleStatus( element.status, index)" :class="{is:true, completed: element.status==='Completed'}">{{ element.status }}</button>
-                <i class="ri-close-circle-fill"></i>
+                <i class="ri-close-circle-fill" @click="deletetask(element.id)"></i>
             </li>
         </div>
     </ul>
@@ -17,10 +17,14 @@ export default{
     name:'TaskComponent',
     props:['todoTasks'],
     methods:{
-        toggleStatus(status,id){
+        toggleStatus(status,index){
            console.log('toggle clicked')
             status = status==="Pending"? "Completed" : "Pending"
-            this.$emit("updateStatus",status,id);
+            this.$emit("updateStatus",status,index);
+        },
+        deletetask(id){
+            // let taskID = 
+            this.$emit('deleteTask',id);
         }
     }
 }

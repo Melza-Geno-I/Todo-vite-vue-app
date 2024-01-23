@@ -1,6 +1,6 @@
 <template>
      <div class="taskContainer">
-            <TaskComponent  :todoTasks="todoItems" @updateStatus="statusUpdate"></TaskComponent>
+            <TaskComponent  :todoTasks="todoItems" @updateStatus="statusUpdate" @deleteTask="deleteFunction"></TaskComponent>
     </div>
 </template>
 
@@ -18,8 +18,11 @@ export default{
                 }
             },
             methods:{
-                statusUpdate(status,id){
-                    this.$emit('status',status,id)
+                statusUpdate(status,index){
+                    this.$emit('status',status,index)
+                },
+                deleteFunction(id){
+                    this.$emit('deleteTask',id)
                 }
             }
         
