@@ -2,7 +2,7 @@
 <template>
   <div class="inputContainer">
         <input class="inputBox" v-model="inputText" type="text" placeholder="What do you want to do?">
-        <button @click="addTasks"><i class="ri-add-circle-fill"></i></button>
+        <button @click="add"><i class="ri-add-circle-fill"></i></button>
     </div>
 </template>
 
@@ -16,19 +16,16 @@ export default{
         }
     },
     methods:{
-        addTasks(){
-            let task = {
-                id: new Date().getTime(),
-                task: this.inputText,
-                status:'Pending'
+        add(){
+            if(!this.inputText){
+                alert('No task Entered!')
+                return;
             }
-           this.$emit('addtask',task);
-           this.inputText=''
+            this.$store.commit('addTask',this.inputText);
+            this.inputText=''
+        }
     }
 }
-   
-}
-
 </script>
 
 
