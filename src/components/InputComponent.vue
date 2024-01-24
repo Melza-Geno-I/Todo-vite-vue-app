@@ -9,7 +9,6 @@
 
 <script>
 export default{
-    props:['tasks'],
     data(){
         return{
             inputText:''
