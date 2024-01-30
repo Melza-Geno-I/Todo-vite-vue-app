@@ -1,30 +1,13 @@
 
 <template>
   <div class="inputContainer">
-        <input class="inputBox" v-model="inputText" type="text" placeholder="What do you want to do?">
-        <button @click="add"><i class="ri-add-circle-fill"></i></button>
+        <input class="inputBox" v-model="$store.state.inputValue" type="text" placeholder="What do you want to do?">
+        <button @click="$store.commit('addTask',$store.state.inputValue)"><i class="ri-add-circle-fill"></i></button>
     </div>
 </template>
 
 
 <script>
-export default{
-    data(){
-        return{
-            inputText:''
-        }
-    },
-    methods:{
-        add(){
-            if(!this.inputText){
-                alert('No task Entered!')
-                return;
-            }
-            this.$store.commit('addTask',this.inputText);
-            this.inputText=''
-        }
-    }
-}
 </script>
 
 

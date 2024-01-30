@@ -7,16 +7,17 @@ Vue.use(Vuex)
 
 const store = new Vuex.Store({
   state:{
+    inputValue:null,
     tasks:[
       {
         id:1,
         task:"task 1",
-        status:'Completed'
+        status:'Pending'
       },
       {
         id:2,
         task:"task 2",
-        status:'Pending'
+        status:'Completed'
       },
     ]
   },
@@ -24,18 +25,21 @@ const store = new Vuex.Store({
     taskIndex: (state)=> (taskId)=>{
       return state.tasks.findIndex(task => task.id === taskId)
     } 
-
   },
   mutations:{
-      addTask(state, taskTitle){
+      addTask(state, inputValue){
+        if(!inputValue){
+          alert('No task Entered!')
+          return;
+      }
         let task = {
             id: new Date().getTime(),
-            task: taskTitle,
+            task: inputValue,
             status:'Pending'
         }
         state.tasks.push(task);
         store.commit('sortTasks');
-
+        state.inputValue=''
     },
     toggleStatus(state, id){
         let taskIndex = store.getters.taskIndex(id);

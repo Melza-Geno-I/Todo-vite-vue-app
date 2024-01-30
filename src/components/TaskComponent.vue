@@ -7,9 +7,7 @@
                 <i class="ri-close-circle-fill" @click="$store.commit('deleteTask',element.id)"></i>
             </li>
         </div>
-    </ul>
-         
-       
+    </ul>     
 </template>
 
 <script>
@@ -37,6 +35,7 @@ export default{
                 width: 250px;
                 /* border: 1px solid red; */
                 text-align: left;
+                text-transform: capitalize;
     }
     .todoTask .is{
         width: 120px;
@@ -47,11 +46,17 @@ export default{
         border: none;
         cursor: pointer;
     }
+    .todoTask button:active{
+        transform: scale(0.9);
+    }
     .todoTask i{
         font-size: 25px;
         color:  #5c5470; 
         cursor: pointer;
 
+    }
+    .todoTask i:active{
+        transform: scale(0.9);
     }
     .todoTask .is.completed{
         background-color: #42b883;
