@@ -2,7 +2,6 @@ import Vue from 'vue'
 import App from './App.vue'
 import Vuex from 'vuex'
 
-
 Vue.use(Vuex)
 
 const store = new Vuex.Store({
@@ -12,19 +11,45 @@ const store = new Vuex.Store({
       {
         id:1,
         task:"task 1",
-        status:'Pending'
+        status:'Pending',
+        dateTime : new Date().toLocaleString('en-us', {
+          month: 'short',
+          day: 'numeric',
+          year: 'numeric',
+          hour: 'numeric',
+          minute: 'numeric'
+        }).replace(/,([^,]*)$/, ' at$1') 
       },
       {
         id:2,
         task:"task 2",
-        status:'Completed'
+        status:'Completed',
+        dateTime : new Date().toLocaleString('en-us', {
+          month: 'short',
+          day: 'numeric',
+          year: 'numeric',
+          hour: 'numeric',
+          minute: 'numeric'
+        }).replace(/,([^,]*)$/, ' at$1') 
+
       },
-    ]
+    ],
+    allTask:[],
   },
+  
   getters:{
     taskIndex: (state)=> (taskId)=>{
       return state.tasks.findIndex(task => task.id === taskId)
-    } 
+    },
+    allTasks:(state) => {
+      state.allTask = state.tasks;
+    },
+    pendingTasks: (state, getters) => {
+       return state.tasks.filter(task => task.status === 'Pending'); 
+    },
+    completedTasks: (state) => {
+      return state.tasks.filter(task => task.status === 'Completed')
+    }
   },
   mutations:{
       addTask(state, inputValue){
@@ -35,10 +60,18 @@ const store = new Vuex.Store({
         let task = {
             id: new Date().getTime(),
             task: inputValue,
-            status:'Pending'
+            status:'Pending',
+             dateTime : new Date().toLocaleString('en-us', {
+              month: 'short',
+              day: 'numeric',
+              year: 'numeric',
+              hour: 'numeric',
+              minute: 'numeric'
+            }).replace(/,([^,]*)$/, ' at$1')    
         }
         state.tasks.push(task);
         store.commit('sortTasks');
+        state.allTask = state.tasks;
         state.inputValue=''
     },
     toggleStatus(state, id){
@@ -56,21 +89,35 @@ const store = new Vuex.Store({
         state.tasks.splice(taskIndex,1);
       }
       store.commit('sortTasks');
+      state.allTask = state.tasks;
+
     },
     sortTasks(state){
       let sortedTask = []
-      let pendingTask = state.tasks.filter(task => task.status !== "Completed");
-      let completedTask = state.tasks.filter(task => task.status === "Completed");
-
-      pendingTask.forEach((task)=>{
+      
+      store.getters.pendingTasks.forEach((task)=>{
         sortedTask.push(task);
       });
 
-      completedTask.forEach((task)=>{
+      store.getters.completedTasks.forEach((task)=>{
           sortedTask.push(task);
       });
       
       state.tasks = sortedTask;
+    },
+    clearAll(state){
+      state.tasks=[];
+      state.allTask = state.tasks;
+
+    },
+    pending(state){
+      state.pendingTask = store.getters.pendingTasks;
+    },
+    completed(state){
+      state.completedTask = store.getters.completedTasks;
+    },
+    displayAll(state){
+      state.tasks = state.allTask;
     }
   }
 })

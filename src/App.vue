@@ -3,6 +3,7 @@
     <div class="container">
       <h1>TODO List APP</h1>
       <InputComponent></InputComponent>
+      <NavigationTask></NavigationTask>
       <TaskListComponent></TaskListComponent>
     </div>
   </div>
@@ -10,12 +11,14 @@
 
 <script>
 import InputComponent from './components/InputComponent.vue';
+import NavigationTask from './components/NavigationTask.vue';
 import TaskListComponent from './components/TaskListComponent.vue';
 export default{
   name:'App',
   components:{
     InputComponent,
-    TaskListComponent
+    TaskListComponent,
+    NavigationTask
   }
 }
 </script>
@@ -26,9 +29,9 @@ export default{
 #app{
   display: flex;
   align-items: center;
+  
 }
 .container{
- 
   margin:  5%;
   text-align: center;
   width:600px;
