@@ -1,6 +1,6 @@
 <template>
      <div class="taskContainer">
-            <TaskComponent  :todoTasks="todoItems" @updateStatus="statusUpdate"></TaskComponent>
+            <TaskComponent></TaskComponent>
     </div>
 </template>
 
@@ -10,19 +10,7 @@ export default{
     name:'TaskListComponent',
     components:{
         TaskComponent,
-    },
-    props:{
-        todoItems:{
-                    type:Array,
-                    default:[]
-                }
-            },
-            methods:{
-                statusUpdate(status,id){
-                    this.$emit('status',status,id)
-                }
-            }
-        
+    }
 }
 
 

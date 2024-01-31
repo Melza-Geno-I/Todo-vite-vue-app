@@ -1,51 +1,24 @@
 <template>
   <div id="app">
     <div class="container">
-      <h1>TODO List</h1>
-      <InputComponent :tasks="tasks" @addtask="addTask"></InputComponent>
-      <TaskListComponent :todoItems="tasks" @status="toggleStatusValue"></TaskListComponent>
+      <h1>TODO List APP</h1>
+      <InputComponent></InputComponent>
+      <NavigationTask></NavigationTask>
+      <TaskListComponent></TaskListComponent>
     </div>
   </div>
 </template>
 
 <script>
 import InputComponent from './components/InputComponent.vue';
+import NavigationTask from './components/NavigationTask.vue';
 import TaskListComponent from './components/TaskListComponent.vue';
 export default{
   name:'App',
   components:{
     InputComponent,
-    TaskListComponent
-  },
-  data(){
-    return{
-        tasks:[
-          {
-            id:1,
-            task:"task 1",
-            status:'Pending'
-          },
-          {
-            id:2,
-            task:"task 2",
-            status:'Completed'
-          },
-      ]
-    }
-  },
-  methods:{
-    addTask(task){
-      this.tasks.push(task);
-      console.log(this.tasks);
-      this.display();
-    },
-    display(){
-
-    },
-    toggleStatusValue(status,index){
-      console.log(index)
-      this.tasks[index].status=status;
-    }
+    TaskListComponent,
+    NavigationTask
   }
 }
 </script>
@@ -56,9 +29,9 @@ export default{
 #app{
   display: flex;
   align-items: center;
+  
 }
 .container{
- 
   margin:  5%;
   text-align: center;
   width:600px;
