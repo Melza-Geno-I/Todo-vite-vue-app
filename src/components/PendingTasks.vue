@@ -1,6 +1,6 @@
 <template>
     <ul class="todoTasks">
-        <div v-for="(element,index) in this.$store.state.allTask" :key="index">
+        <div v-for="(element,index) in this.$store.state.pendingTask" :key="index">
             <li class="todoTask" >
                 <h3>
                     {{ element.task}}
@@ -15,7 +15,7 @@
 
 <script>
 export default{
-    name:'TaskComponent',
+    name:'PendingTasks',
 }
 </script>
 
@@ -26,17 +26,17 @@ export default{
         align-items: right;
         flex-direction: column;
     }
-   
     .todoTask{
                 display: flex;
                 align-items: center;
                 justify-content: center;
-                border-bottom: 1px solid rgb(175, 175, 175);
+                border-top: 1px solid rgb(175, 175, 175);
                 padding: 15px;
                 gap: 30px;
             }
     .todoTask h3{
                 width: 250px;
+                /* border: 1px solid red; */
                 text-align: left;
                 text-transform: capitalize;
     }
@@ -49,10 +49,6 @@ export default{
         border: none;
         cursor: pointer;
     }
-    .todoTask .is:hover{
-        box-shadow: #fdbbc0 0px 0px 0px 1px;
-    }
-    
     .todoTask button:active{
         transform: scale(0.9);
     }
@@ -60,6 +56,7 @@ export default{
         font-size: 20px;
         color:  #5c5470; 
         cursor: pointer;
+
     }
     .todoTask i:active{
         transform: scale(0.9);
@@ -67,11 +64,9 @@ export default{
     .todoTask .is.completed{
         background-color: #42b883;
     }
-    .todoTask .is.completed:hover{
-        box-shadow: #a0f7d0  0px 0px 0px 1px;
-    }
     .todoTask .dateTime{
         color: grey;
+        /* font-size: 12px; */
         text-align: left;
     }
 </style>
