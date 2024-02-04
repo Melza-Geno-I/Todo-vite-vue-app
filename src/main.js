@@ -1,38 +1,46 @@
 import Vue from 'vue'
 import App from './App.vue'
 import Vuex from 'vuex'
+import VueRouter from 'vue-router'
+import Router from './routes'
 
 Vue.use(Vuex)
+Vue.use(VueRouter)
+
+const router = new VueRouter({
+  routes: Router,
+  mode: 'history'
+})
 
 const store = new Vuex.Store({
   state:{
     inputValue:null,
     tasks:[
-      {
-        id:1,
-        task:"task 1",
-        status:'Pending',
-        dateTime : new Date().toLocaleString('en-us', {
-          month: 'short',
-          day: 'numeric',
-          year: 'numeric',
-          hour: 'numeric',
-          minute: 'numeric'
-        }).replace(/,([^,]*)$/, ' at$1') 
-      },
-      {
-        id:2,
-        task:"task 2",
-        status:'Completed',
-        dateTime : new Date().toLocaleString('en-us', {
-          month: 'short',
-          day: 'numeric',
-          year: 'numeric',
-          hour: 'numeric',
-          minute: 'numeric'
-        }).replace(/,([^,]*)$/, ' at$1') 
+      // {
+      //   id:1,
+      //   task:"task 1",
+      //   status:'Pending',
+      //   dateTime : new Date().toLocaleString('en-us', {
+      //     month: 'short',
+      //     day: 'numeric',
+      //     year: 'numeric',
+      //     hour: 'numeric',
+      //     minute: 'numeric'
+      //   }).replace(/,([^,]*)$/, ' at$1') 
+      // },
+      // {
+      //   id:2,
+      //   task:"task 2",
+      //   status:'Completed',
+      //   dateTime : new Date().toLocaleString('en-us', {
+      //     month: 'short',
+      //     day: 'numeric',
+      //     year: 'numeric',
+      //     hour: 'numeric',
+      //     minute: 'numeric'
+      //   }).replace(/,([^,]*)$/, ' at$1') 
 
-      },
+      // },
     ],
     allTask:[],
   },
@@ -41,10 +49,7 @@ const store = new Vuex.Store({
     taskIndex: (state)=> (taskId)=>{
       return state.tasks.findIndex(task => task.id === taskId)
     },
-    allTasks:(state) => {
-      state.allTask = state.tasks;
-    },
-    pendingTasks: (state, getters) => {
+    pendingTasks: (state) => {
        return state.tasks.filter(task => task.status === 'Pending'); 
     },
     completedTasks: (state) => {
@@ -70,8 +75,9 @@ const store = new Vuex.Store({
             }).replace(/,([^,]*)$/, ' at$1')    
         }
         state.tasks.push(task);
-        store.commit('sortTasks');
         state.allTask = state.tasks;
+        store.commit('sortTasks');
+       
         state.inputValue=''
     },
     toggleStatus(state, id){
@@ -88,8 +94,9 @@ const store = new Vuex.Store({
       if(taskIndex != -1 && confirm("Do you want to remove this task?")){
         state.tasks.splice(taskIndex,1);
       }
-      store.commit('sortTasks');
       state.allTask = state.tasks;
+      store.commit('sortTasks');
+
 
     },
     sortTasks(state){
@@ -103,22 +110,13 @@ const store = new Vuex.Store({
           sortedTask.push(task);
       });
       
+      state.allTask = sortedTask;
       state.tasks = sortedTask;
     },
     clearAll(state){
       state.tasks=[];
       state.allTask = state.tasks;
-
     },
-    pending(state){
-      state.pendingTask = store.getters.pendingTasks;
-    },
-    completed(state){
-      state.completedTask = store.getters.completedTasks;
-    },
-    displayAll(state){
-      state.tasks = state.allTask;
-    }
   }
 })
 
@@ -126,5 +124,6 @@ import './assets/main.css'
 
 new Vue({
   store: store,
+  router: router,
   render: (h) => h(App)
 }).$mount('#app')
