@@ -1,8 +1,16 @@
 import Vue from 'vue'
 import App from './App.vue'
 import Vuex from 'vuex'
+import VueRouter from 'vue-router'
+import Router from './routes'
 
 Vue.use(Vuex)
+Vue.use(VueRouter)
+
+const router = new VueRouter({
+  routes: Router,
+  mode: 'history'
+})
 
 const store = new Vuex.Store({
   state:{
@@ -41,9 +49,6 @@ const store = new Vuex.Store({
     taskIndex: (state)=> (taskId)=>{
       return state.tasks.findIndex(task => task.id === taskId)
     },
-    // allTasks:(state) => {
-    //   state.allTask = state.tasks;
-    // },
     pendingTasks: (state) => {
        return state.tasks.filter(task => task.status === 'Pending'); 
     },
@@ -119,5 +124,6 @@ import './assets/main.css'
 
 new Vue({
   store: store,
+  router: router,
   render: (h) => h(App)
 }).$mount('#app')
