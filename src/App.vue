@@ -2,7 +2,8 @@
   <div id="app">
     <div class="container">
       <h1>TODO List APP</h1>
-      <InputComponent></InputComponent>
+      <!-- <InputComponent></InputComponent> -->
+      <router-view></router-view>
       <NavigationTask></NavigationTask>
       <TaskListComponent></TaskListComponent>
     </div>
