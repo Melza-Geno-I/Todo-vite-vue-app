@@ -1,9 +1,8 @@
 
 <template>
   <div class="inputContainer">
-    
         <input class="inputBox" v-model="$store.state.inputValue" type="text" placeholder="What do you want to do?">
-        <button @click="$store.commit('addTask',$store.state.inputValue)"><i class="ri-add-circle-fill"></i></button>
+        <button @click="$store.commit('addTask',$store.state.inputValue)"><i class="ri-check-line"></i></button>
         <i class="ri-eraser-fill clear" @click="$store.commit('clearAll')"></i>
     </div>
 </template>
@@ -54,7 +53,7 @@
     .inputContainer button{
         background-color: transparent;
         border: none;
-        font-size: 40px;
+        font-size: 30px;
         cursor: pointer;
         color: #352f44; 
         transition: .2s;
