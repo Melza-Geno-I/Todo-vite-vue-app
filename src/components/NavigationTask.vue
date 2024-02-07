@@ -1,8 +1,17 @@
 <template>
     <nav class="nav">
-        <i class="ri-calendar-schedule-line all tab" :class="{ active: activeTab === 'all' }" @click="allTab" ></i> 
+
+        <!-- router links start -->
+       <router-link to="/allTasks"><i class="ri-calendar-schedule-line all tab" @click="allTab"></i></router-link>
+       <router-link to="/pendingTasks"><i class="ri-hourglass-fill pending tab" @click="pendingTab"></i></router-link>
+       <router-link to="/completedTasks"><i class="ri-task-line completed tab" @click="completedTab"></i></router-link>
+       <router-link to="/add"><i class="ri-add-circle-fill tab"></i></router-link>
+
+        <!-- router links end -->
+
+        <!-- <i class="ri-calendar-schedule-line all tab" :class="{ active: activeTab === 'all' }" @click="allTab" ></i> 
         <i class="ri-hourglass-fill pending tab" :class="{ active: activeTab === 'pending'}" @click="pendingTab"></i>
-        <i class="ri-task-line completed tab" :class="{ active: activeTab === 'completed' }"  @click="completedTab"></i>
+        <i class="ri-task-line completed tab" :class="{ active: activeTab === 'completed' }"  @click="completedTab"></i> -->
     </nav>
 </template>
 
@@ -83,4 +92,11 @@ export default{
 
     }
 
+
+/* router link style */
+.router-link-active{
+    border-radius: 50%;
+        background-color: rgba(216, 216, 216, 0.469);
+        font-size: 25;
+}
 </style>

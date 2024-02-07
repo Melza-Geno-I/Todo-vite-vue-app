@@ -3,8 +3,8 @@
     <div class="container">
       <h1>TODO List APP</h1>
       <!-- <InputComponent></InputComponent> -->
-      <router-view></router-view>
       <NavigationTask></NavigationTask>
+      <router-view></router-view>
       <TaskListComponent></TaskListComponent>
     </div>
   </div>
